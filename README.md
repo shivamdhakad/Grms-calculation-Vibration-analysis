@@ -14,3 +14,6 @@ note:<br />
 The Fourier Transform is used to convert a time varying signal waveform into a frequency varying signal waveform. That is, given a Time Domain signal representation, a Fourier Transform will convert that representation into a Frequency Domain representation.
 The power spectral density is equal to the integral of the signal squared, regardless of whether your signal waveform is expressed in the time domain, or the frequency domain.
 But, the advantage of using the frequency domain representation is that you can then consider the power distribution, or power contributed by each frequency spectra.
+<br />
+
+The root mean square acceleration (Grms) is the square root of the area under the ASD curve in the frequency domain. The Grms value is typically used to express the overall energy of a particular random vibration event and is a statistical value used in mechanical engineering for structural design and analysis purposes.
