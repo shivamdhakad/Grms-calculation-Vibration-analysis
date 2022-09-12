@@ -1,0 +1,43 @@
+Matlab codes:
+
+close all
+clear all
+%Load CSV
+   tic %start timer
+   fprintf('%4.2f seconds - Time to Load Data\n',toc)
+   Z_acc = csvread('ottobot z acc - Sheet1.csv',0,1); %array of data for acc z
+   Z_acc= Z_acc./9.81;  % normalising acc. data
+   Z_acc= Z_acc + 1;
+   Z_acc= Z_acc.';
+   [N,L]= size(Z_acc)
+   %Determine variables and Display size
+%plot data of acc and time  
+t = 0:124892;
+%t=t.';
+plot(t,Z_acc)
+figure
+title('z_acc with time');
+xlabel('time(s)');
+ylabel('acc z(g)');
+grid on;
+Fs=500;  % sampling frequency
+Y= fft(Z_acc);  % fast fourier transform, to find frequency at maximum vibration
+P2=abs(Y/L);
+P1=P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1); % to remove symmtric curve
+f=Fs*(0:(L/2))/L;  % frequency vector
+%plot(f,10.^(log(P1)))
+%figure
+%title('FFT spectrum of x(t)')
+%xlabel('f(hz)')
+%ylabel('|P1(f)|')
+% ploting Acceleration density curve(or PSD)
+P1 = ( L/Fs) .* abs(P1).^2
+area = trapz(flip(P1),flip(f));
+disp(area);
+GRMS= sqrt(area) %Grms is square root of area
+plot(f,P1)
+title('PSD curve with GRMS value', GRMS);
+xlabel('f (Hz)');
+ylabel('G^2/Hz');
+grid on;
